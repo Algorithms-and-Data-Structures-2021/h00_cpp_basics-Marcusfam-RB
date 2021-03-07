@@ -11,10 +11,8 @@ using std::copy;
 
 // Задание 1
 void swap_args(int *lhs, int *rhs) {
-    if(*lhs and *rhs){
-        int c = *lhs;
-        *lhs = *rhs;
-        *rhs = c;
+    if((lhs != nullptr) && (rhs != nullptr)) {
+        std::swap(*lhs, *rhs);
     }
 }
 
@@ -24,14 +22,14 @@ int **allocate_2d_array(int num_rows, int num_cols, int init_value) {
         int **array = new int *[num_rows];
         for (int i = 0; i < num_rows; i++) {
             array[i] = new int[num_cols];
-            for (int j = 0; j < num_cols; j++)
+            for (int j = 0; j < num_cols; j++) {
                 array[i][j] = init_value;
+            }
         }
         return array;
     }
     else
         return nullptr;
-    //return nullptr;
 }
 
 // Задание 3
@@ -46,14 +44,13 @@ bool copy_2d_array(int **arr_2d_source, int **arr_2d_target, int num_rows, int n
     }
     else
         return false;
-    //return false;
 }
 
 // Задание 4
 void reverse_1d_array(vector<int> &arr) {
-    if (!arr.empty()){
+    if (!arr.empty()) {
         for (int i = 0; i < arr.size()/2; i++) {
-            swap(arr[i], arr[arr.size()]);
+            std::swap(arr[i], arr[arr.size() - i - 1]);
         }
     }
 }
@@ -61,16 +58,17 @@ void reverse_1d_array(vector<int> &arr) {
 // Задание 5
 void reverse_1d_array(int *arr_begin, int *arr_end) {
     if ((arr_begin != nullptr) && (arr_end != nullptr)) {
-        if (arr_end < arr_begin)
+        if (arr_end < arr_begin) {
             return;
-        swap(*arr_begin, *arr_end);
+        }
+        std::swap(*arr_begin, *arr_end);
         reverse_1d_array(arr_begin + 1, arr_end - 1);
     }
 }
 
 // Задание 6
 int *find_max_element(int *arr, int size) {
-    if ((size > 0) && (arr != nullptr)){
+    if ((size > 0) && (arr != nullptr)) {
         int* ptrmax = &arr[0];
         for (int i = 1; i < size; i++) {
             if (arr[i] > *ptrmax) {
@@ -81,19 +79,17 @@ int *find_max_element(int *arr, int size) {
     }
     else
         return nullptr;
-    //return nullptr;
 }
 
 // Задание 7
 vector<int> find_odd_numbers(vector<int> &arr) {
    vector<int> odd_arr;
-    for (int i = 1; i < arr.size(); i++){
-        if (arr[i] % 2 != 0){
+    for (int i = 1; i < arr.size(); i++) {
+        if (arr[i] % 2 != 0) {
             odd_arr.push_back(arr[i]);
         }
     }
     return odd_arr;
-    //return {};
 }
 
 // Задание 8
@@ -107,5 +103,4 @@ vector<int> find_common_elements(vector<int> &arr_a, vector<int> &arr_b) {
         }
     }
     return common_arr;
-    //return {};
 }
